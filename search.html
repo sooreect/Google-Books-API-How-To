@@ -1,0 +1,45 @@
+<!-- Sooreechine, Tida -->
+<!-- CS290 HOW-TO GUIDE: GOOGLE BOOKS API -->
+<!-- May 18, 2016 -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="UTF-8">
+		<title>How-To: Google Books API</title>
+		<link rel="stylesheet" href="style.css" type="text/css">
+	</head>
+	<body>
+    <div class="header"><br>
+      <p class="title">
+        <span id="title1">G</span><span id="title2">o</span><span id="title3">o</span><span id="title1">g</span><span id="title4">l</span><span id="title2">e</span> Books API How-To</p>
+      <p class="subtitle">OSU CS290 2016</p>
+      <div class="author">Tida Sooreechine</div>
+    </div>
+    <hr />
+    <div class="main">
+      <p class="topic">Searching for Books</p><br>
+      <p class="subtopic">Book Identifiers<p>
+      <p class="content">Google utilizes 3 different kinds of IDs:</p>
+      <ol class="content">
+        <li>Volume IDs
+        <li>Bookshelf IDs
+        <li>User IDs
+      </ol>
+      <p class="content">The focus of this tutorial will be to use the volume ID to extract information specific to the book edition. Google uses this internal reference code, a unique string that appears to be a mix of random alphabets and numbers with no real-world relevance, to catalog their library database.</p>
+      <p class="content">There are many different methods, but the easiest way to obtain this ID code is to head over to <a href="https://books.google.com" class="google">books.google.com</a> and select the book of choice.
+      <p class="content">The volume ID can be found in the <i>id</i> parameter of the URL in the browser address bar. For example:</p>
+      <a href="https://books.google.com/books?id=CxxGPgAACAAJ&dq=harry+potter+and+the+sorcerer%27s+stone&hl=en&sa=X&ved=0ahUKEwisnLWIweXMAhXBz4MKHTjPAUAQ6wEIPDAE"><span class="bookid">https://books.google.com/books?<span class="bookid2">id=CxxGPgAACAAJ</span>&amp;dq=harry+potter+and+the+sorcerer%27s+stone&amp;hl . . . </span></a></p>
+      <p class="content">You can now use this id string to look up the data that makeup this book object, simply by appending the id value to the end of this URL <a href="http://www.google.com/books/feeds/volumes/" class="google">http://www.google.com/books/feeds/volumes/</a> like so:</p><br>
+      <center><a href="http://www.google.com/books/feeds/volumes/CxxGPgAACAAJ" class="google">http://www.google.com/books/feeds/volumes/<span class="bookid3">CxxGPgAACAAJ</span></a></center><br>
+      <p class="content">The output?</p>
+      <center><img src="img/img2gibberish.png"></center>
+
+      <p class="content">Great. What we have here is still not particularly useful, is it? You can make out a few key words here and there, but that's a poor way of handling the data. What we really want to do is create an API request and choose among the number of methods provided to extract the information that we really want. This is where your API key comes into play.</p>  
+    </div><br><br>
+    <div>
+      <center><a href="authorization.html" class="button">Previous</a>
+      <a href="request.html" class="button">Next</a></center>
+    </div><br><br><br><br>
+	</body>
+</html>

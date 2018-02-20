@@ -1,0 +1,29 @@
+<!-- Sooreechine, Tida -->
+<!-- CS290 HOW-TO GUIDE: GOOGLE BOOKS API -->
+<!-- May 19, 2016 -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Get Book Author from ISBN Number</title>
+		<script src="getbook3.js"></script>
+	</head>
+	<body>
+		<form> 
+			<h2>Get Book Information from ISBN</h2>
+			<p><label for="isbnNumber">Enter Book ISBN: </label>
+			<input type="text" name="isbnNumber" id="isbnNumber">
+			<input type="submit" id="isbnSubmit">
+		</form> 
+		<div>
+			<h3>Results: </h3>
+			<ul>
+				<li><strong>Title: </strong><span id="title"></span>
+				<li><strong>Subtitle: </strong><span id="subtitle"></span>
+				<li><strong>Author: </strong><span id="author"></span>
+				<li><strong>ISBN: </strong><span id="isbn"></span>
+			</ul>
+		</div>
+	</body>
+</html>

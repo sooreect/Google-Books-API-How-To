@@ -1,0 +1,41 @@
+<!-- Sooreechine, Tida -->
+<!-- CS290 HOW-TO GUIDE: GOOGLE BOOKS API -->
+<!-- May 18, 2016 -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="UTF-8">
+		<title>How-To: Google Books API</title>
+		<link rel="stylesheet" href="style.css" type="text/css">
+	</head>
+	<body>
+    <div class="header"><br>
+      <p class="title">
+        <span id="title1">G</span><span id="title2">o</span><span id="title3">o</span><span id="title1">g</span><span id="title4">l</span><span id="title2">e</span> Books API How-To</p>
+      <p class="subtitle">OSU CS290 2016</p>
+      <div class="author">Tida Sooreechine</div>
+    </div>
+    <hr />
+    <div class="main">
+      <p class="topic">Accessing Google Books API</p><br>
+      <p class="subtopic">Authentication Modes<p>
+      <p class="content">Google grants you access permission on the condition that it can identify the appllication requesting the data. There are 2 ways to go about this:</p>
+      <ul class="content">
+        <li><strong>API Key:</strong> Used for requesting public data, such as page count or book reviews, and can be substituted with an OAuth credential.
+        <li><strong>OAuth 2.0:</strong> Used for interacting with private user data, such as an account's non-public bookshelf contents.<br>
+      </ul><br>
+      
+      <p class="subtopic">Getting Your API Key<p>
+      <p class="content">The first step to retrieving the API key is to register your application with 
+      <a href="https://console.developers.google.com" class="google">Google Developers Console</a>. You will need a Google account to create a project before activating the Books API on the console.</p>
+      <p class="content">There are 4 types of API keys: server, browser, iOS, and Android. Go ahead and select the browser key type, which is used on client applications, when prompted.</p>
+      <center><img src="img/img1apikey.png"></center>
+      <p class="content">It is very important that this key is safeguarded appropriately, as it will be used in all your future data requests.</p>
+    </div><br><br>
+    <div>
+      <center><a href="index.html" class="button">Previous</a>
+      <a href="search.html" class="button">Next</a></center>
+    </div><br><br><br><br>
+	</body>
+</html>

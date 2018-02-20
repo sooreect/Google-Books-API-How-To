@@ -1,0 +1,135 @@
+<!-- Sooreechine, Tida -->
+<!-- CS290 HOW-TO GUIDE: GOOGLE BOOKS API -->
+<!-- May 18, 2016 -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="UTF-8">
+		<title>How-To: Google Books API</title>
+		<link rel="stylesheet" href="style.css" type="text/css">
+	</head>
+	<body>
+    <div class="header"><br>
+      <p class="title">
+        <span id="title1">G</span><span id="title2">o</span><span id="title3">o</span><span id="title1">g</span><span id="title4">l</span><span id="title2">e</span> Books API How-To</p>
+      <p class="subtitle">OSU CS290 2016</p>
+      <div class="author">Tida Sooreechine</div>
+    </div>
+    <hr />
+    <div class="main">
+      <p class="topic">Code Demonstrations</p><br>
+      <p class="subtopic">Demo 1: Getting Book Data with Volume ID Input
+      <p class="content">Another approach to the previous code example is to create a form field that would accept the user's input for volume ID and create a request object with that value fed. This way, you won't have to hardcode the volume id into the program and can look up as many books as you'd like. 
+      <p class="content">Let's start with the HTML side of things first this time:</p>
+
+      <div class="bg">
+      <div class="snippet">HTML</div>
+        <div class="code">
+          <p>&lt;html&gt;<br>
+          <span class="indent">&lt;head&gt;</span><br>
+          <span class="indent"><span class="indent">&lt;script src="getbook2.js"&gt;&lt;/script&gt;</span></span><br>
+          <span class="indent">&lt;/head&gt;</span><br>
+          <span class="indent">&lt;body&gt;</span><br>
+
+          <span class="indent"><span class="indent">&lt;form&gt;</span></span><br>
+          <span class="indent"><span class="indent"><span class="indent">&lt;h2&gt;Get Book Information from Volume ID&lt;/h2&gt;</span></span></span><br>
+          <span class="indent"><span class="indent"><span class="indent">&lt;p&gt;&lt;label for="volumeId"&gt;Enter volume id: &lt;/label&gt;</span></span></span><br>
+          <span class="indent"><span class="indent"><span class="indent">&lt;input type="text" name="volumeId" id="volumeId"&gt;</span></span></span><br>
+          <span class="indent"><span class="indent"><span class="indent">&lt;input type="submit" id="volumeIdSubmit"&gt;</span></span></span><br>
+          <span class="indent"><span class="indent">&lt;/form&gt;</span></span><br>
+
+          <span class="indent"><span class="indent">&lt;div&gt;</span></span><br>
+          <span class="indent"><span class="indent"><span class="indent">&lt;h3&gt;Results:&lt;/h3&gt;</span></span></span><br>
+          <span class="indent"><span class="indent"><span class="indent">&lt;ul&gt;</span></span></span><br>
+          <span class="indent"><span class="indent"><span class="indent"><span class="indent">&lt;li&gt;&lt;strong&gt;Title: &lt;/strong&gt;&lt;span id="title"&gt;&lt;/span&gt;</span></span></span></span><br>
+          <span class="indent"><span class="indent"><span class="indent"><span class="indent">&lt;li&gt;&lt;strong&gt;Subtitle: &lt;/strong&gt;&lt;span id="subtitle"&gt;&lt;/span&gt;</span></span></span></span><br>
+          <span class="indent"><span class="indent"><span class="indent"><span class="indent">&lt;li&gt;&lt;strong&gt;Author: &lt;/strong&gt;&lt;span id="author"&gt;&lt;/span&gt;</span></span></span></span><br>
+          <span class="indent"><span class="indent"><span class="indent"><span class="indent">&lt;li&gt;&lt;strong&gt;ISBN: &lt;/strong&gt;&lt;span id="isbn"&gt;&lt;/span&gt;</span></span></span></span><br>
+          <span class="indent"><span class="indent"><span class="indent">&lt;/ul&gt;</span></span></span><br>
+          <span class="indent"><span class="indent">&lt;/div&gt;</span></span><br>
+          <span class="indent">&lt;/body&gt;</span><br>
+          &lt;/html&gt;</p>  
+        </div>
+      </div><p>
+
+    <div class="bg">
+      <div class="snippet">JAVASCRIPT</div>
+      <div class="code">
+        <p>document.addEventListener("DOMContentLoaded", bindButton);<p>
+
+        function bindButton() {<br>
+        <span class="indent">document.getElementById("volumeIdSubmit").addEventListener("click", function(event) {</span><br>
+        <span class="indent"><span class="indent">var req = new XMLHttpRequest();</span></span><br>
+        <span class="indent"><span class="indent">var apiKey = "AIzaSyB0BRhPAFxpNIirkTfzKZnQZPTap8e2vHQ";</span></span><br>
+        <span class="indent"><span class="indent">var payload = {"volumeId": "null"};</span></span><br>
+        <span class="indent"><span class="indent">payload.volumeId = document.getElementById("volumeId").value;</span></span><p>
+        
+        <span class="indent"><span class="indent">req.open("GET", "https://www.googleapis.com/books/v1/volumes/" + payload.volumeId + "?key=" + apiKey, true);</span></span><p>
+
+        <span class="indent"><span class="indent">req.addEventListener("load", function() {</span></span><br>
+        <span class="indent"><span class="indent"><span class="indent">if(req.status >= 200 &amp;&amp; req.status < 400){</span></span></span><br>
+        <span class="indent"><span class="indent"><span class="indent"><span class="indent">var response = JSON.parse(req.responseText);</span></span></span></span><br>
+        <span class="indent"><span class="indent"><span class="indent"><span class="indent">document.getElementById("title").textContent = response.volumeInfo.title;</span></span></span></span><br>
+        <span class="indent"><span class="indent"><span class="indent"><span class="indent">document.getElementById("subtitle").textContent = response.volumeInfo.subtitle;</span></span></span></span><br>
+        <span class="indent"><span class="indent"><span class="indent"><span class="indent">document.getElementById("author").textContent = response.volumeInfo.authors;</span></span></span></span><p>
+
+        <span class="indent"><span class="indent"><span class="indent"><span class="indent">var isbnList = "";</span></span></span></span><br>
+        <span class="indent"><span class="indent"><span class="indent"><span class="indent">for (var i=0; i< response.volumeInfo.industryIdentifiers.length; i++)</span></span></span></span><br>
+        <span class="indent"><span class="indent"><span class="indent"><span class="indent"><span class="indent">isbnList += response.volumeInfo.industryIdentifiers[i].identifier + ", ";</span></span></span></span></span><br>
+        <span class="indent"><span class="indent"><span class="indent"><span class="indent">isbnList = isbnList.substring(0, isbnList.lastIndexOf(','));</span></span></span></span><br>
+        <span class="indent"><span class="indent"><span class="indent"><span class="indent">document.getElementById("isbn").textContent = isbnList;</span></span></span></span><br>
+        <span class="indent"><span class="indent"><span class="indent">} else {</span></span></span><br>
+        <span class="indent"><span class="indent"><span class="indent"><span class="indent">console.log("Error in network request: " + request.statusText);</span></span></span></span><br>
+        <span class="indent"><span class="indent"><span class="indent">}</span></span></span><br>
+        <span class="indent"><span class="indent">});</span></span><br>
+        <span class="indent"><span class="indent">req.send(JSON.stringify(payload));</span></span><br>
+        <span class="indent"><span class="indent">event.preventDefault();</span></span><br>
+        <span class="indent">});</span><br>
+        }
+      </div>
+    </div>
+
+    <p class="content">Here's the web browser's output:</p>
+    <img src="img/img3demo1.png">
+
+    <p class="content">So what do we have here that's new? In the Javascript segment of the code above, we enlisted an addEventListener method to bind the Submit button on the HTML to the following AJAX function. This will allow the function to take place once it detects a mouse click on the button. 
+    <p class="content">The request getter is essentially the same with few minor changes. Rather than collecting the volume id from the hard-coded variable, the function retrieves the value from the html input text field and stores it in an object variable payload, with its only attribute being the volumeId. 
+    <p class="content">In the code, you will also find 3 additional API methods used to get the bibliographic information: Title, Subtitle, and ISBN (International Standard Book Number). While the <span class="code">volumeInfo.title</span> and <span class="code">volumeInfo.subtitle</span> exist in the form of a string, the <span class="code">volumeInfo.industryIdentifiers</span> API method spits out a list of type-ISBN# string pairs instead. Because we are solely interested in the ISBN numbers, it is important that we use a for-loop to cycle through the list and print only the <span class="code">volumeInfo.industryIdentifiers[i].identifier</span> values.
+    <p class="content">Not too bad so far? Let's look at one last example.</p><br>
+
+    <p class="subtopic">Demo 2: Getting Book Data with ISBN Input</p>
+    <p class="content">If you're going to let the user input the search, using Google's Volume ID probably isn't the best way to go about it. To get the result you want with the least troubles is probably through the ISBN, since it's the number being used internationally. Every book website is going to list this number and not the Google's internal reference code. This will save the user the trouble of having to look it up in the Google Books site.</p>
+    <p class="content">The good news is that searching via the ISBN isn't that much more difficult compared to searching with the Volume ID. The only difference is that the query may actually generate a list of more than one results with that ISBN number. What you want to do in that case is take only data from the first item of the list, since it's more than likely to be the one you were hoping to find.
+    <p class="content">Now there's no point in showing the entire code, so I'll be highlighting just those few differences in the snippets below.
+
+    <div class="bg">
+      <div class="indent">
+        <div class="code">
+          <p>req.open("GET", "https://www.googleapis.com/books/v1/volumes?q=isbn:" + payload.isbnNumber + "&amp;key=" + apiKey, true);
+        </div>
+      </div>
+    </div>
+
+     <div class="bg">
+      <div class="indent">
+        <div class="code">
+          <p>var response = JSON.parse(req.responseText);<br>
+          response = response.items[0];
+        </div>
+      </div>
+    </div>
+    <br><img src="img/img4demo2.png">
+    <p class="content">And that's it! Thank you for checking out the tutorial.</p>
+    </div><br><br>
+
+    <div>
+      <center>
+        <a href="request.html" class="button">Previous</a><br><p><br>
+        <a href="index.html" class="google">START OVER</p></a>
+
+      </center>
+    </div><br><br><br><br>
+
+	</body>
+</html>

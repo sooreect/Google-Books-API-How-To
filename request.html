@@ -1,0 +1,124 @@
+<!-- Sooreechine, Tida -->
+<!-- CS290 HOW-TO GUIDE: GOOGLE BOOKS API -->
+<!-- May 18, 2016 -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="UTF-8">
+		<title>How-To: Google Books API</title>
+		<link rel="stylesheet" href="style.css" type="text/css">
+	</head>
+	<body>
+    <div class="header"><br>
+      <p class="title">
+        <span id="title1">G</span><span id="title2">o</span><span id="title3">o</span><span id="title1">g</span><span id="title4">l</span><span id="title2">e</span> Books API How-To</p>
+      <p class="subtitle">OSU CS290 2016</p>
+      <div class="author">Tida Sooreechine</div>
+    </div>
+    <hr />
+    <div class="main">
+      <p class="topic">Creating an API Request</p><br>
+      <p class="subtopic">API Methods</p>
+      <p class="content">Before we get into the structuring of the API request, it's imperative that you know what object attributes are actually available to extract. Again, with the API key, the only access we have are the non-private data. The list of methods can be found in the reference under Resource Representations: </p>
+      <center><a href="https://developers.google.com/books/docs/v1/reference/volumes#resource-representations" class="google">Google Books API Methods</a></center>
+      <p class="content">When you make successful method calls via Javascript, Google returns the attribute values requested in a JSON object, which is an array of name-value pairs <span class="code">{"name1":"value1", "name2":"value2", . . . }</span>. The names are the methods you use to invoke information (e.g., <span class="code">volumeInfo.authors</span>), while the values represent the information you seek (e.g., <span class="code">J.K. Rowling</span>).</p><br>
+
+      <p class="subtopic">API GET Request</p>
+      <p class="content">With the book's Volume ID and API methods in hands, we can finally proceed with the actual request. We will be using Javascript to make these GET requests asynchronously; the process is otherwise known as AJAX.</p>
+      <p class="content">Here's how you get the author's name from the ID. 
+
+      <p class="content">Take a look at the following snippet of code, which introduces 3 variables. This will be in your Javascript file.</p>
+      <div class="bg">
+        <div class="indent">
+          <div class="code">
+            var req = new XMLHttpRequest();<br>
+            var apiKey = "AIzaSyB0BRhPAFxpNIirkTfzKZnQZPTap8e2vHQ";<br>
+            var volumeId = "CxxGPgAACAAJ";
+          </div>
+        </div>
+      </div>
+      <p class="content">First, we instantiated the theXMLHttpRequest object for making an HTTP request. The data successfully returned by the server will be stored in this variable. The last two are things we had seen and saved from the previous steps: the API key Google uses to recognize the application you'd registered and the book's volume ID.</p>
+
+      <p class="content">Now we open the request object with those variables:</p>
+      <div class="bg">
+        <div class="indent">
+          <div class="code">req.open("GET", "https://www.googleapis.com/books/v1/volumes/" + volumeId + "?key=" + apiKey, true);</div>
+        </div>
+      </div>
+      <p class="content">The open method takes 3 arguments: 
+      <ol class="content">
+        <li>Method of request: GET for retrieving data. POST is the alternative and is generally used to create and add data.
+        <li>Resource URL (and API key for Google Books)
+        <li>A boolean value. The TRUE here indicates that it's an asynchronous call, which is preferable over its counterpart, synchronous call, because it allows processes to take place simultaneously. Synchronous requests will halt all proceedings until it receives a response from the server, which can be unpredictable. 
+      </ol>
+      </p>
+
+      <p class="content">You can then complete the request by sending it to server using
+      <div class="bg">
+        <div class="indent">
+          <div class="code">req.send();</div>
+        </div>
+      </div>
+      </p>
+      <p class="content">If the request is successful, the server will return the search result in a JSON string response, which will then need to be parsed into a JSON object format via
+      <div class="bg">
+        <div class="indent">
+          <div class="code">JSON.parse(req.responseText)</div>
+        </div>
+      </div>
+      </p>
+      <p class="content">The result of which can be outputted onto the console for viewing.</p>
+
+      <p class="content">To better capture the result, however, you will want to register a callback that will tell the browser how to handle the response in the event that we receive the OK status from the Google server prior to sending off the API request. Google, like many other servers, uses status code "200" to indicate successful requests. The response can be saved in a variable for later use.</p>
+      <p class="content">The code below shows the request process in its entirety, along with the accommodating html file. Through Javascript, we then sent the result of our search to be displayed to the client.
+
+      <div class="bg">
+        <div class="snippet">JAVASCRIPT</div>
+        <div class="code">
+          <p>var req = new XMLHttpRequest();<br>
+          var apiKey = "AIzaSyB0BRhPAFxpNIirkTfzKZnQZPTap8e2vHQ";<br>
+          var volumeId = "CxxGPgAACAAJ";<p>
+          
+          req.open("GET", "https://www.googleapis.com/books/v1/volumes/" + volumeId + "?key=" + apiKey, true);<p>
+          req.addEventListener("load", function() {<br>
+          <span class="indent">if(req.status >= 200 &amp;&amp; req.status < 400) {</span><br>
+          <span class="indent"><span class="indent">var response = JSON.parse(req.responseText);</span></span><br>
+          <span class="indent"><span class="indent">document.getElementById("author").textContent = response.volumeInfo.authors;</span></span><br>
+          <span class="indent">} else {</span><br>
+          <span class="indent"><span class="indent">console.log("Error in network request: " + request.statusText);</span></span><br>
+          <span class="indent">}</span><br>
+          });<p>
+          req.send(null);<p>
+        </div>  
+      </div><p>
+
+      <div class="bg">
+        <div class="snippet">HTML</div>
+        <div class="code">
+          <p>&lt;html&gt;<br>
+          <span class="indent">&lt;head&gt;</span><br>
+          <span class="indent"><span class="indent">&lt;script src="getbook.js"&gt;&lt;/script&gt;</span></span><br>
+          <span class="indent">&lt;/head&gt;</span><br>
+          <span class="indent">&lt;body&gt;</span><br>
+          <span class="indent"><span class="indent">&lt;div&gt;</span></span><br>
+          <span class="indent"><span class="indent"><span class="indent">&lt;p&gt;The author of book volume ID #CxxGPgAACAAJ is &lt;span id="author"&gt;&lt;/span&gt;&lt;/p&gt;</span></span></span><br>
+          <span class="indent"><span class="indent">&lt;/div&gt;</span></span><br>
+          <span class="indent">&lt;/body&gt;</span><br>
+          &lt;/html&gt;</p>
+        </div>  
+      </div>
+
+      <p class="content">The below message will be outputed to browser. </p>
+      <center><div id="example">The author of book volume ID #CxxGPgAACAAJ is J. K. Rowling.</div></center>
+      <p class="content">Note: the <span class="code">volumeInfo.authors </span> is the API method that we chose for extracting the information out of the JSON response object. To get other data values, you can choose other methods listed on the reference.
+      <p class="content">And there you have it: the result of your query displayed on the browser! 
+    </div><br><br>
+
+    <div>
+      <center><a href="search.html" class="button">Previous</a>
+      <a href="demo.html" class="button">Next</a></center>
+    </div><br><br><br><br>
+
+	</body>
+</html>

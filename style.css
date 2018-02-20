@@ -1,0 +1,191 @@
+/* Sooreechine, Tida
+   CS290 HOW-TO GUIDE: GOOGLE BOOKS API
+   May 17, 2016 */
+
+/* Sources: 
+- http://stackoverflow.com/questions/3029422/how-do-i-auto-resize-an-image-to-fit-a-div-container 
+- http://stackoverflow.com/questions/5462251/button-width-in-css3
+*/
+
+#title1 {
+  margin: auto;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 63px;
+  color: #0057e7;
+}
+
+#title2 {
+  margin: auto;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 63px;
+  color: #d62d20;
+}
+
+#title3 {
+  margin: auto;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 63px;
+  color: #ffa700;
+}
+
+#title4 {
+  margin: auto;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 63px;
+  color: #008744;
+}
+
+.title {
+  margin: auto;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 63px;
+  color: #cd5c5c;
+}
+
+.subtitle {
+  margin: auto;
+  padding-left: 10%;
+  font-family: "Merriweather", "Georgia", serif;
+  font-size: 25px;
+  color: #bc8f8f;
+}
+
+.author {
+  margin: auto;
+  padding-right: 10%;
+  text-align: right;
+  font-family: "Merriweather", "Georgia", serif;
+  font-size: 15px;
+  color: black;
+}
+
+.topic {
+  margin: auto;
+  text-align: left;
+  font-family: "Merriweather", "Georgia", serif;
+  font-size: 50px;
+  color: #8B0000;
+}
+
+.subtopic {
+  margin: auto;
+  text-align: left;
+  padding-left: 5px;
+  font-family: "Merriweather", "Georgia", serif;
+  font-size: 25px;
+  color: #8B0000;
+}
+
+.content {
+  font-size: 14px;
+  color: #784f4f;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+}
+
+.code {
+  font-size: 13px;
+  color: #006666;
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
+.snippet {
+  font-size: 15px;
+  color: white;
+  background-color: #cd5c5c;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-left: 3px;
+}
+
+#example {
+  font-size: 14px;
+  color: black;
+  background-color: white;
+  font-family: "Times New Roman", Times, serif;
+  padding-left: 3px;
+}
+
+a.button {
+    webkit-appearance: button;
+    -moz-appearance: button; 
+    appearance: button;
+    display:inline-block;
+    width: 100px;
+    padding: 10px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: #880000;
+    color: white;
+}
+
+a.google {
+  text-decoration: none;
+  font-family: "Merriweather", "Georgia", serif;
+  font-size: 20px;
+  color: #cd5c5c;
+}
+
+a {
+  text-decoration: none;
+  font-family: "Merriweather", "Georgia", serif;
+  font-size: 18px;
+  color: #bc8f8f;
+}
+
+.bookid {
+  text-decoration: none;
+  font-family: "Merriweather", "Georgia", serif;
+  font-size: 14px;
+  color: #cd5c5c;
+}
+
+.bookid2 {
+  text-decoration: none;
+  font-family: "Merriweather", "Georgia", serif;
+  font-size: 16px;
+  color: #0057e7;
+}
+
+.bookid3 {
+  text-decoration: none;
+  font-family: "Merriweather", "Georgia", serif;
+  font-size: 20px;
+  color: #0057e7;
+}
+
+.indent {
+  padding-left: 18px;
+}
+
+.bg {
+  background-color: #FAF5F2;
+  padding-bottom: 1px;
+}
+
+hr {
+  width:70%; 
+  height:1px; 
+  background: #fff 
+}
+
+.header {
+  margin: auto;
+  width: 70%; 
+  padding-bottom: 10px;
+}
+
+.main {
+  margin: auto;
+  width: 60%;
+  padding-top: 10px;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
